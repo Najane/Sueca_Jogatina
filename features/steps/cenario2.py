@@ -6,60 +6,45 @@ import time
 
 caps = {}
 caps["platformName"] = "Android"
-caps["platformVersion"] = "11"
-caps["deviceName"] = "NNIV140030"
-caps["appPackage"] = "com.jogatina.tranca"
-caps["appActivity"] = "com.jogatina.menu.Splash"
+caps["deviceName"] = "7e1c07d9"
+caps["appPackage"] = "com.riva.sueca"
+caps["appActivity"] = "com.riva.sueca.activity.SplashActivity"
 caps["automationName"] = "UiAutomator2"
-caps["AppWaitpackage"] = "com.jogatina.MainMenu"
 caps["ensureWebviewsHavePages"] = True
-caps["locale"] = "US"
-caps["language"] = "en"
+caps["locale"] = "BR"
+caps["language"] = "pt"
 
 
 @given('que eu esteja na pagina de Preferences')
 def step_impl(context):
-    context.driver = webdriver.Remote("http://127.0.0.1:4723/wd/hub", caps)
+    context.driver = webdriver.Remote("http://127.0.0.1:4724/wd/hub", caps)
     time.sleep(20)
     TouchAction(context.driver).tap(x=537, y=436).perform()
     time.sleep(10)
 
-    el1 = context.driver.find_element_by_id("com.jogatina.tranca:id/buttonOptions")
+    el1 = context.driver.find_element_by_id(
+        "com.riva.sueca:id/buttonSettings")
     time.sleep(10)
     el1.click()
     time.sleep(10)
 
 
-@given('desmarque os checkbox de configuração')
+@given(u'marque os checkbox de Tocar para jogar carta')
 def step_impl(context):
-    el4 = context.driver.find_element_by_xpath("/hierarchy/  android.widget.FrameLayout/android.widget.LinearLayout/android.widget.FrameLayout/android.widget.LinearLayout/android.widget.FrameLayout/android.widget.RelativeLayout/android.widget.FrameLayout/android.widget.LinearLayout/android.widget.FrameLayout/android.widget.ListView/android.widget.LinearLayout[5]/android.widget.LinearLayout/android.widget.CheckBox")
+    el2 = context.driver.find_element_by_xpath(
+        "/hierarchy/android.widget.FrameLayout/android.widget.LinearLayout/android.widget.FrameLayout/android.widget.LinearLayout/android.widget.FrameLayout/android.widget.RelativeLayout/android.widget.FrameLayout/android.widget.LinearLayout/android.widget.FrameLayout/android.widget.ListView/android.widget.LinearLayout[4]/android.widget.LinearLayout/android.widget.CheckBox")
     time.sleep(5)
-    el4.click()
-    el5 = context.driver.find_element_by_xpath("/hierarchy/android.widget.FrameLayout/android.widget.LinearLayout/android.widget.FrameLayout/android.widget.LinearLayout/android.widget.FrameLayout/android.widget.RelativeLayout/android.widget.FrameLayout/android.widget.LinearLayout/android.widget.FrameLayout/android.widget.ListView/android.widget.LinearLayout[6]/android.widget.LinearLayout/android.widget.CheckBox")
-    time.sleep(5)
-    el5.click()
-    el6 = context.driver.find_element_by_xpath("/hierarchy/android.widget.FrameLayout/android.widget.LinearLayout/android.widget.FrameLayout/android.widget.LinearLayout/android.widget.FrameLayout/android.widget.RelativeLayout/android.widget.FrameLayout/android.widget.LinearLayout/android.widget.FrameLayout/android.widget.ListView/android.widget.LinearLayout[7]/android.widget.LinearLayout/android.widget.CheckBox")
-    time.sleep(5)
-    el6.click()
-    time.sleep(10)
-    el8 = context.driver.find_element_by_accessibility_id("Navigate up")
-    time.sleep(5)
-    el8.click() 
+    el2.click()
 
 
-@when('estiver desmarcado')
+@when('estiver marcado')
 def step_impl(context):
-    el5 = context.driver.find_element_by_id("com.jogatina.tranca:id/buttonOptions")
+    el3 = context.driver.find_element_by_xpath(
+        "/hierarchy/android.widget.FrameLayout/android.widget.LinearLayout/android.widget.FrameLayout/android.widget.LinearLayout/android.widget.FrameLayout/android.widget.RelativeLayout/android.widget.FrameLayout/android.widget.LinearLayout/android.widget.FrameLayout/android.widget.ListView/android.widget.LinearLayout[4]/android.widget.LinearLayout/android.widget.CheckBox").is_selected()
     time.sleep(5)
-    el5.click()
-    time.sleep(5)
-     
-    
+    # el3.click()
 
-@then('foi feita a troca')
+
+@then('a troca foi feita')
 def step_impl(context):
-    el8 = context.driver.find_element_by_accessibility_id("Navigate up")
-    el8.click()
-    time.sleep(5)
     context.driver.quit()
-  

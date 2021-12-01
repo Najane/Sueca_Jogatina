@@ -6,47 +6,51 @@ import time
 
 caps = {}
 caps["platformName"] = "Android"
-caps["platformVersion"] = "11"
-caps["deviceName"] = "NNIV140030"
-caps["appPackage"] = "com.jogatina.tranca"
-caps["appActivity"] = "com.jogatina.menu.Splash"
+caps["deviceName"] = "7e1c07d9"
+caps["appPackage"] = "com.riva.sueca"
+caps["appActivity"] = "com.riva.sueca.activity.SplashActivity"
 caps["automationName"] = "UiAutomator2"
-caps["AppWaitpackage"] = "com.jogatina.MainMenu"
 caps["ensureWebviewsHavePages"] = True
-caps["locale"] = "US"
-caps["language"] = "en"
+caps["locale"] = "BR"
+caps["language"] = "pt"
 
 
-@given('que esteja na pagina de Preferencias')
+@given('que esteja na pagina de Preferências')
 def go_to_page(context):
-    context.driver = webdriver.Remote("http://localhost:4723/wd/hub", caps)
-    time.sleep(15)
-    TouchAction(context.driver).tap(x=521, y=489).perform()
+    context.driver = webdriver.Remote("http://127.0.0.1:4724/wd/hub", caps)
+    time.sleep(20)
+    TouchAction(context.driver).tap(x=537, y=436).perform()
     time.sleep(5)
 
-    el1 = context.driver.find_element_by_id("com.jogatina.tranca:id/buttonOptions")
-    time.sleep(10)
+    el1 = context.driver.find_element_by_id(
+        "com.riva.sueca:id/buttonSettings")
     el1.click()
+    time.sleep(10)
+
+
+@when('arrasto a tela até o fim da página')
+def step_impl(context):
+    TouchAction(context.driver).press(x=816, y=1455).move_to(
+        x=786, y=629).release().perform()
+    # el1.click()
     time.sleep(5)
 
 
-@when('eu escolho o Nível de Dificuldade Normal')
-def create_todo(context):
-    el6 = context.driver.find_element_by_xpath("/hierarchy/android.widget.FrameLayout/android.widget.LinearLayout/android.widget.FrameLayout/android.widget.LinearLayout/android.widget.FrameLayout/android.widget.RelativeLayout/android.widget.FrameLayout/android.widget.LinearLayout/android.widget.FrameLayout/android.widget.ListView/android.widget.LinearLayout[8]/android.widget.RelativeLayout")
-    el6.click()
-    time.sleep(5)
-    el7 = context.driver.find_element_by_xpath("/hierarchy/android.widget.FrameLayout/android.widget.LinearLayout/android.widget.FrameLayout/android.widget.FrameLayout/android.widget.FrameLayout/androidx.appcompat.widget.LinearLayoutCompat/android.widget.FrameLayout/android.widget.ListView/android.widget.CheckedTextView[2]")
-    el7.click()
-    time.sleep(5)
-
-
-@then('verifico se "Normal" está selecionado')
+@when(u'vejo a versão do App')
 def check_todo(context):
-    el6 = context.driver.find_element_by_xpath("/hierarchy/android.widget.FrameLayout/android.widget.LinearLayout/android.widget.FrameLayout/android.widget.LinearLayout/android.widget.FrameLayout/android.widget.RelativeLayout/android.widget.FrameLayout/android.widget.LinearLayout/android.widget.FrameLayout/android.widget.ListView/android.widget.LinearLayout[8]/android.widget.RelativeLayout")
-    el6.click() 
-    time.sleep(5)
-    el5 = context.driver.find_element_by_id("android:id/button2")
-    el5.click() 
-    time.sleep(5)
+    el2 = context.driver.find_element_by_xpath(
+        "/hierarchy/android.widget.FrameLayout/android.widget.LinearLayout/android.widget.FrameLayout/android.widget.LinearLayout/android.widget.FrameLayout/android.widget.RelativeLayout/android.widget.FrameLayout/android.widget.LinearLayout/android.widget.FrameLayout/android.widget.ListView/android.widget.LinearLayout[9]/android.widget.RelativeLayout")
+    el2.click()
+    time.sleep(15)
 
+
+@then(u'valido se a versão é "{texto}"')
+def step_impl(context, texto):
+    el3 = context.driver.find_element_by_xpath(
+        "/hierarchy/android.widget.FrameLayout/android.widget.LinearLayout/android.widget.FrameLayout/android.widget.LinearLayout/android.widget.FrameLayout/android.widget.RelativeLayout/android.widget.FrameLayout/android.widget.LinearLayout/android.widget.FrameLayout/android.widget.ListView/android.widget.LinearLayout[9]/android.widget.RelativeLayout/android.widget.TextView[2]")
+    el3.click()
+    time.sleep(5)
+    result = el3.text
+    el3.click()
     context.driver.quit()
+    assert texto == result

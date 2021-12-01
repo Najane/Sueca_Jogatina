@@ -6,20 +6,18 @@ import time
 
 caps = {}
 caps["platformName"] = "Android"
-caps["platformVersion"] = "11"
-caps["deviceName"] = "NNIV140030"
-caps["appPackage"] = "com.jogatina.tranca"
-caps["appActivity"] = "com.jogatina.menu.Splash"
+caps["deviceName"] = "7e1c07d9"
+caps["appPackage"] = "com.riva.sueca"
+caps["appActivity"] = "com.riva.sueca.activity.SplashActivity"
 caps["automationName"] = "UiAutomator2"
-caps["AppWaitpackage"] = "com.jogatina.MainMenu"
 caps["ensureWebviewsHavePages"] = True
-caps["locale"] = "US"
-caps["language"] = "en"
+caps["locale"] = "BR"
+caps["language"] = "pt"
 
 
-@given('que eu esteja na pagina MainMenu')
+@given('que eu esteja na pagina Home')
 def go_to_page(context):
-    context.driver = webdriver.Remote("http://localhost:4723/wd/hub", caps)
+    context.driver = webdriver.Remote("http://127.0.0.1:4724/wd/hub", caps)
     print("awaint 15s before skipping google accounts")
     time.sleep(15)
     TouchAction(context.driver).tap(x=521, y=489).perform()
@@ -27,15 +25,15 @@ def go_to_page(context):
     time.sleep(5)
 
 
-@when('o idioma do device esta em Ingles')
+@when('o idioma do device esta em Português')
 def create_todo(context):
-    assert caps["language"] == "en"
+    assert caps["language"] == "pt"
 
 
 @then('existe um botao com o texto "{texto}"')
 def check_todo(context, texto):
-
-    el1 = context.driver.find_element_by_id("com.jogatina.tranca:id/buttonSinglePlayer")
+    el1 = context.driver.find_element_by_id(
+        "com.riva.sueca:id/buttonSinglePlayer")
 
     time.sleep(15)
     result = el1.text

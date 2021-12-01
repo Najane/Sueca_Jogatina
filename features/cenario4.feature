@@ -1,8 +1,9 @@
 # language: pt
-Funcionalidade: Trocar o Nível de Dificuldade
+Funcionalidade: Veridicar a versão do App
 
 
-    Cenário: Ir para Preferencias e Nivel de Dificuldade
-        Dado que esteja na pagina de Preferencias
-        Quando eu escolho o Nível de Dificuldade Normal
-        Então verifico se "Normal" está selecionado
+    Cenário: Verificar versão do App
+        Dado que esteja na pagina de Preferências
+        Quando arrasto a tela até o fim da página
+        E vejo a versão do App
+        Então valido se a versão é "1.5.4"

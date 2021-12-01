@@ -1,9 +1,9 @@
 # language: pt
-Funcionalidade: Deve desmarcar os checkbox
+Funcionalidade: Deve marcar os checkbox
 
 
-    Cenário: Desativar as vibrações, sons e notificações
-        Dado que eu esteja na pagina de Preferences
-        E desmarque os checkbox de configuração
-        Quando estiver desmarcado
-        Então foi feita a troca
+    Cenário: Clicar em Tocar para jogar carta
+        Dado que eu esteja na pagina de Preferências
+        E marque os checkbox de Tocar para jogar carta
+        Quando estiver marcado
+        Então a troca foi feita

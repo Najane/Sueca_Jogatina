@@ -1,10 +1,10 @@
 # language: pt
-Funcionalidade: Deve verificar se o idioma está em Ingês
+Funcionalidade: Deve verificar se o idioma está em Portugês
 
-    Cenário: Checar Idioma em Ingles
-        Dado que eu esteja na pagina MainMenu        
-        Quando o idioma do device esta em Ingles
-        Então existe um botao com o texto "PLAY NOW!"
+    Cenário: Checar Idioma em Português
+        Dado que eu esteja na pagina Home        
+        Quando o idioma do device esta em Português
+        Então existe um botao com o texto "JOGAR AGORA!"
 
 
 
